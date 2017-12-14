@@ -47,3 +47,5 @@ bar() // this 是 window
  ## 总结
  1. this 就是你 call 一个函数时，传入的 context。
  2. 如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。
+ 
+ [参考](https://zhuanlan.zhihu.com/p/23804247)
