@@ -41,7 +41,7 @@ obj.foo() // this 是 obj
 bar() // this 是 window
 ```
 **代码转换**: 
- - obj.foo() 转换成 obj.foo(obj)
+ - obj.foo() 转换成 obj.foo.call(obj)
  - bar() 转换成 bar.call(undefined) 或者 bar.call() ,不在严格模式下"use strict",所以this就是默认的 window
  
  ## 总结
