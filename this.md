@@ -37,9 +37,13 @@ var obj = {
 }
 
 var bar = obj.foo
-obj.foo() // 打印出的 this 是 obj
-bar() // 打印出的 this 是 window
+obj.foo() // this 是 obj
+bar() // this 是 window
 ```
 **代码转换**: 
  - obj.foo() 转换成 obj.foo(obj)
  - bar() 转换成 bar.call(undefined) 或者 bar.call() ,不在严格模式下"use strict",所以this就是默认的 window
+ 
+ ## 总结
+ 1. this 就是你 call 一个函数时，传入的 context。
+ 2. 如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。
