@@ -1,13 +1,13 @@
 ## 函数调用
 ### 在ES5里函数的调用有以下方式：
 ```
-func(arg1, arg2)) 
+fn(arg1, arg2)) 
 obj.child.method(arg1, arg2)
-func.call(context, arg1, arg2) 或 fn.apply(context,[arg1,arg2])
+fn.call(context, arg1, arg2) 或 fn.apply(context,[arg1,arg2])
 ```
 
 然而函数正常调用形式是最后一种，其他的调用方式是语法糖。
-## 函数调用形式： `func.call(context, arg1, arg2) 或 fn.apply(context,[arg1,arg2])`
+### 函数调用形式： `fn.call(context, arg1, arg2) 或 fn.apply(context,[arg1,arg2])`
 ## this，就是call是第一个参数 context
 ```
 function fn(a,b){
