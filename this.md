@@ -49,3 +49,50 @@ bar() // this 是 window
  2. 如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。
  
  [参考](https://zhuanlan.zhihu.com/p/23804247)
+ 
+ ```
+let name = '小明'
+let people = {
+    name: '小张',
+    sayName: function(){
+        console.log(this.name)
+    }
+}
+let sayAgain = people.sayName
+function sayName(){
+    console.log(this.name)
+}
+
+sayName()
+/*
+ 解析：代码转换 `sayName.call(undefined)` ，因为是非严格模式，所以 this 默认是 Window，所以这里输出全局的 name 即 "小明"
+*/
+people.sayName()
+/*
+解析: 代码转换 `people.sayName.call(people)` ，所以这里输出 `people.name` 即 "小张"
+*/
+
+sayAgain()
+/*
+解析: 代码转换 `sayAgain.call(undefined)` ，，因为是非严格模式，所以 this 默认是 Window，所以这里输出全局的 name 即 "小明"
+*/
+```
+
+```
+var arr = []
+for(var i=0; i<3; i++){
+    arr[i] = function(){ console.log(this) }
+}
+var fn = arr[0]
+
+arr[0]
+/*
+解析: 因为函数是个特殊的对象，所以 arr 相当于 { '0': function(){}, '1': function(){}, '2': function(){}, length:3}
+arr[0]相当于 `arr['0']` 相当于 `arr.0` （当然这种写法不符合规范），所以 arr[0]代码转换  arr.0.call(arr), this就是 arr
+*/
+
+fn()
+/*
+解析: 代码转换  `fn.call(undefined)`， 所以 fn 里面的 this 是 Window
+*/
+```
