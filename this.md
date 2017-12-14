@@ -27,3 +27,19 @@ fn.call(undefined,1,2) 或 fn.apply(undefined,[1,2])
 > 如果你传的 context 是 null 或者 undefined，那么 window 对象就是默认的 context（严格模式下默认 context 是 undefined）
 
 所以上面的this打印出来就是window
+
+## 例子
+```
+var obj = {
+  foo: function(){
+    console.log(this)
+  }
+}
+
+var bar = obj.foo
+obj.foo() // 打印出的 this 是 obj
+bar() // 打印出的 this 是 window
+```
+**代码转换**: 
+ - obj.foo() 转换成 obj.foo(obj)
+ - bar() 转换成 bar.call(undefined) 或者 bar.call() ,不在严格模式下"use strict",所以this就是默认的 window
