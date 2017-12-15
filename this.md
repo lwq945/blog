@@ -135,5 +135,87 @@ var app = {
 app.bind()
 ```
 ## ES6 箭头函数
-**箭头函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。**
-this指向的固定化，并不是因为箭头函数内部有绑定this的机制，实际原因是**箭头函数根本没有自己的this**，导致**内部的this就是外层代码块的this**。正是因为它没有this，所以也就不能用作构造函数。
+```
+var obj={  
+    fn:function(){  
+        setTimeout(function(){  
+            console.log(this);  
+        });  
+    }  
+}  
+obj.fn();//window  
+```
+this出现在全局函数setTImeout()中的匿名函数里，并没有某个对象进行显示调用，所以this指向window对象
+
+```
+var p= {
+   data:{
+      flag: true
+   },
+   init: ()=>{
+     console.log(this.data.flag)
+   }
+}
+
+p.init()
+```
+
+JS 每一个 function 有自己独立的运行上下文，而箭头函数不属于普通的 function，所以没有独立的上下文。所以在箭头函数里写的 this 其实是包含该箭头函数最近的一个 function 上下文中的 this（如果没有最近的 function，就是全局）。
+
+```
+var obj={  
+    num:3,  
+    fn:function(){  
+        setTimeout(function(){  
+            console.log(this.num);  
+        });  
+    }  
+}  
+obj.fn();//undefined  
+//............................................................  
+var obj1={  
+    num:4,  
+    fn:function(){  
+        setTimeout(() => {  
+            console.log(this.num);  
+        });  
+    }  
+}  
+obj1.fn();//4  
+```
+在没有使用箭头函数的情况下，this指向了window（匿名函数，没有调用的宿主对象），而window对象并没有num属性，而在使用箭头函数的情况下，this指向对象obj1
+
+## 多层嵌套的箭头函数
+```
+var obj1={  
+    num:4,  
+    fn:function(){  
+        var f=function(){      
+            console.log(this); //window,因为函数f定义后并没有对象调用，this直接绑定到最外层的window对象  
+            setTimeout(() => {  
+                console.log(this);//window，外层this绑定到了window,内层也相当于定义在window层（全局环境）  
+            });  
+        }  
+        f();  
+    }  
+}  
+obj1.fn();  
+```
+
+```
+var obj1={  
+    num:4,  
+    fn:function(){  
+        var f=() => {      
+            console.log(this); //object,f()定义在obj1对象中，this就指向obj1,这就是箭头函数this指向的关键  
+            setTimeout(function() {  
+                console.log(this);//window，非箭头函数的情况下还是要看宿主对象是谁，如果没有被对象调用，函数体中的this就绑定的window上  
+            });  
+        }  
+        f();  
+    }  
+}  
+obj1.fn();  
+```
+1. 箭头函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
+2. 箭头函数根本没有自己的this，导致**内部的this就是外层代码块的this**。正是因为它没有this，所以也就不能用作构造函数。
