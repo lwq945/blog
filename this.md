@@ -96,6 +96,46 @@ fn()
 解析: 代码转换  `fn.call(undefined)`， 所以 fn 里面的 this 是 Window
 */
 ```
+## 测试题
+```
+var name = 'hunger'
+var obj = {
+   name: 'valley',
+   fn: function(){
+       this.name = 'jirengu'  //this是 obj
+       var name = 'world'
+       function fn2(){
+        var name = 'hello'
+         console.log(this.name)  //打印出 'hunger'
+        }
+       fn2()
+   }
+}
+obj.fn()
+```
+obj.fn() 代码转换为 obj.fn.call(obj), 执行，this是obj，name: 'valley'就变为 'jirengu'，然后fn2() 代码转换为 fn2.call(),this为undefined，默认为window，打印出 'hunger'
+
+```
+var name = 'hunger'
+var obj = {
+   name: 'valley',
+   fn: function(){
+       this.name = 'jirengu' //this 是 obj
+       var name = 'world'
+       function fn2(){
+        var name = 'hello'
+         console.log(this.name)
+       }
+       return fn2
+   }
+}
+var obj2 = {
+    name: 'oh my god'
+}
+obj2.fn = obj.fn() // obj2.fn = fn2
+obj2.fn()
+```
+解析：obj.fn() 代码转换为 obj.fn.call(obj) ,执行完返回 fn2,所以obj2.fn = fn2, obj2.fn() 代码转换为 obj2.fn.call(obj2),this指向obj2，所以打印出'oh my god'
 
 ## apply、call 、bind有什么作用，什么区别？
 apply 、 call 、bind三者都是用来改变函数的this对象的指向的。
