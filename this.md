@@ -87,7 +87,7 @@ var fn = arr[0]
 
 arr[0]
 /*
-解析: 因为函数是个特殊的对象，所以 arr 相当于 { '0': function(){}, '1': function(){}, '2': function(){}, length:3}
+解析: 因为数组是个特殊的对象，所以 arr 相当于 { '0': function(){}, '1': function(){}, '2': function(){}, length:3}
 arr[0]相当于 `arr['0']` 相当于 `arr.0` （当然这种写法不符合规范），所以 arr[0]代码转换  arr.0.call(arr), this就是 arr
 */
 
@@ -134,3 +134,6 @@ var app = {
 }
 app.bind()
 ```
+## ES6 箭头函数
+**箭头函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。**
+this指向的固定化，并不是因为箭头函数内部有绑定this的机制，实际原因是**箭头函数根本没有自己的this**，导致**内部的this就是外层代码块的this**。正是因为它没有this，所以也就不能用作构造函数。
