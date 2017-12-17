@@ -31,3 +31,10 @@
 3. 浏览器在加载页面时发现响应头部有 set-cookie字段，就把这个cookie 种到浏览器指定域名下。(保存到指定域名下)
 4. 当下次刷新页面时，发送的请求会带上这条cookie， 服务端在接收到后根据这个session_id来识别用户。
 
+## cookie和session的区别
+1. session 保存在服务器端 (默认被存在在服务器的一个文件里,session 可以放在 文件、数据库、或内存中都可以。），cookie 保存在客户端（浏览器）
+2. session 的运行依赖 session_id，而 session_id 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但是可以通过其它方式实现，比如在 url 中传递 session_id）
+3. 用户验证这种场合一般会用 session
+4. 单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。
+5. cookie不是很安全(XSS攻击)，别人可以分析存放在本地的 cookie并进行cookie欺骗。cookie 中的所有数据在客户端可以被修改。这就意味着数据非常容易被伪造。
+ 
