@@ -108,3 +108,13 @@ white-space: nowrap;  //空白间隙不换行
 overflow: hidden;     //溢出隐藏
 text-overflow: ellipsis; //溢出的文本用...代替
 ```
+
+## 伪类和伪元素的区别？
+- 伪类用于当前已有元素处于某种状态，为其添加对应的样式，根据用户行为而动态变化。
+```
+//例如a链接的4种状态
+a:link、a:vistied、a:hover、a:active
+```
+- 伪元素是某个元素的子元素，逻辑上存在，但实际上不存在文档数中。
+
+
