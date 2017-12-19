@@ -1,2 +1,2 @@
-## HTML + JavaScript知识点总结
+## 前端知识点总结
 
