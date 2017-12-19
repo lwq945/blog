@@ -7,7 +7,7 @@ div h1~h6 p hr form ul dl ol pre table li dd dt tr td th
 ```
 em strong span a br img button input label select textarea code script 
 ```
-**块级元素和行内元素的区别
+**块级元素和行内元素的区别**
 1. 块级元素占据一整行空间；行内元素占据的空间由自身内容宽度决定。
 2. 块级元素可以包含块级元素和行内元素；行内元素只能包含行内元素和文本。
 3. 块级元素可以设置宽度、高度；行内元素设置无效。
@@ -20,10 +20,12 @@ em strong span a br img button input label select textarea code script
 
 ## a:link, a:hover, a:active, a:visited 的顺序是怎样的？ 为什么？
 顺序：a：link，a：visited，a：hover，a：active
+
 这4个选择器是a标签的不同行为，优先级都一样。浏览器解析css样式是从上到下，后面的会覆盖前面的。所以为了保证特殊状态的样式能正常展示，就放在靠后的。
 
 ## 选择器的优先级是怎样的?对于复杂场景如何计算优先级？
 **选择器的优先级从高到低：**
+
 1. 在属性后面使用 !important 会覆盖页面内任何位置定义的元素样式
 2. 作为style属性写在元素标签上的内联样式
 3. id选择器
@@ -33,6 +35,7 @@ em strong span a br img button input label select textarea code script
 7. 标签选择器
 8. 通配符选择器
 9. 浏览器自定义
+
 **对于复杂场景计算优先级：**
 把选择器划分为以下等级(等级由高到低)：
 - 行内样式==>a
