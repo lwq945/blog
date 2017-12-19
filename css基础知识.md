@@ -44,3 +44,67 @@ em strong span a br img button input label select textarea code script
 - 标签选择器、伪元素==>d
 
 查看各个等级的个数，由高到低比较，同一级别的个数越多，优先级就越高，当同一级别的个数相等时，对比下一等级的个数，以此类推。
+
+## IE 盒模型和W3C盒模型有什么区别？
+IE 盒模型：box-sizing: border-box; W3C盒模型:box-sizing: content-box;(默认盒模型)
+
+**区别：**
+1. W3C盒模型：设置的元素width和height，只是内容的宽高度。
+2. IE 盒模型: 设置的元素的width和height，实际上是内容的宽度+左右内边距+左右边框；内容的高度+上下内边距+上下边框
+
+## `*{ box-sizing: border-box;}`的作用是什么？
+匹配任何的元素，按照指定的IE盒模型来计算宽度和高度
+
+## 让一个元素"看不见"有几种方式？有什么区别？
+1. display:none; 元素不在占据文档流的空间
+2. visibility:hidden; 元素不可见，但还占据空间
+3. opacity: 0; 透明度为0，但还占据空间
+4. height: 0; 块级元素设置高度为0
+5. background-color: rgba(0,0,0,0.2) 设置元素的背景为透明，元素仍占据空间。
+
+## inline-block有什么特性？如何去除缝隙？高度不一样的inline-block元素如何顶端对齐？
+`inline-block`具有块级元素的特性可以设置宽度、高度、margin、padding；又有行内元素的特性不占据一正行空间，由自身内容宽度决定。
+
+**去除缝隙：**
+`inline-block`元素间留白间距出现的原因就是**标签段之间的空格**
+
+1. 去除html标签之间的空白，缝隙就没了，但这样会导致代码连在一起，可读性差。
+2. 在父元素上设置font-size:0;,在`inline-block`元素上重新设置font-size。
+
+**高度不一样的inline-block元素如何顶端对齐**
+都设置vertical-align: top;
+
+## px, em, rem 有什么区别？
+- px: 固定单位
+- em：相对单位，相对父元素字体的大小
+- rem: 相对单位，相对根元素(html)字体的大小
+
+## line-height: 2和line-height: 200%有什么区别?
+```
+//html
+<div class="parent">
+    <div class="son">
+      子元素<br/>
+      子元素
+    </div>
+</div>
+//css
+ .parent {
+      line-height: 2/200%;
+      font-size: 16px;
+  }
+  .son {
+      font-size: 30px;
+  }
+```
+以上面的代码为例子：
+
+- line-height: 2;父元素的行高设置为2时，会根据子元素的字体大小动态计算出行高值让子元素继承。所以，子元素行高等于30px * 2 = 60px;
+- line-height: 200%；父元素的行高设置为200%时，会根据父元素的字体大小先计算出行高值然后再让子元素继承。所以，子元素的行高等于200%*16px = 32px;
+
+## 单行文本溢出加 (...)如何实现？
+```
+white-space: nowrap;  //空白间隙不换行
+overflow: hidden;     //溢出隐藏
+text-overflow: ellipsis; //溢出的文本用...代替
+```
