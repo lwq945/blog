@@ -1,7 +1,7 @@
 ## 函数调用
 ### 在ES5里函数的调用有以下方式：
 ```
-fn(arg1, arg2)) 
+fn(arg1, arg2) 
 obj.child.method(arg1, arg2)
 fn.call(context, arg1, arg2) 或 fn.apply(context,[arg1,arg2])
 ```
